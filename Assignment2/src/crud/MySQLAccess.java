@@ -91,17 +91,17 @@ public class MySQLAccess {
 			trns.setCreatedBy("wjs");
 			dao.updateTransaction(trns);
 
-			//			Transaction trns2 = new Transaction();
-			//			trns2.setID(103888);
-			//			trns2.setNameOnCard("wjs111");
-			//			trns2.setCardNumber("88888899");
-			//			trns2.setUnitPrice(8.8);
-			//			trns2.setQuantity(100);
-			//			trns2.setTotalPrice(10000.00);
-			//			trns2.setExpDate("2019/01/01");
-			//			trns2.setCreatedOn(null);
-			//			trns2.setCreatedBy("wjs");
-			//			dao.createTransaction(trns2);
+			Transaction trns2 = new Transaction();
+			trns2.setID(103888);
+			trns2.setNameOnCard("wjs111");
+			trns2.setCardNumber("88888899");
+			trns2.setUnitPrice(8.8);
+			trns2.setQuantity(100);
+			trns2.setTotalPrice(10000.00);
+			trns2.setExpDate("2019/01/01");
+			trns2.setCreatedOn(null);
+			trns2.setCreatedBy("wjs");
+			dao.createTransaction(trns2);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
