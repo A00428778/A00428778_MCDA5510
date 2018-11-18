@@ -11,7 +11,8 @@ public class TestClient {
 
 		// TODO Auto-generated method stub
 		TrxnWebServiceProxy proxy = new TrxnWebServiceProxy();
-        proxy.setEndpoint("http://localhost:8080/Assignment3/services/TrxnWebService");//defined in wsdl
+        //proxy.setEndpoint("http://localhost:8080/Assignment3/services/TrxnWebService");//defined in wsdl
+	proxy.setEndpoint("http://dev.cs.smu.ca:8555/Assignment3/services/TrxnWebService");
 
         try {
 
