@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Use this file to deploy some handlers/chains and services      --><!-- Two ways to do this:                                           --><!--   java org.apache.axis.client.AdminClient deploy.wsdd          --><!--      after the axis server is running                          --><!-- or                                                             --><!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   --><!--      from the same directory that the Axis engine runs         --><deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from TrxnWebServiceService WSDL service -->
+
+  <service name="TrxnWebService" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://service.mcds5510.com"/>
+      <parameter name="wsdlServiceElement" value="TrxnWebServiceService"/>
+      <parameter name="schemaQualified" value="http://service.mcds5510.com,http://crud.mcds5510.com"/>
+      <parameter name="wsdlServicePort" value="TrxnWebService"/>
+      <parameter name="className" value="com.mcds5510.service.TrxnWebService"/>
+      <parameter name="wsdlPortType" value="TrxnWebService"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation xmlns:operNS="http://service.mcds5510.com" xmlns:retNS="http://service.mcds5510.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="removeTransaction" qname="operNS:removeTransaction" returnQName="retNS:removeTransactionReturn" returnType="rtns:boolean" soapAction="">
+        <parameter xmlns:pns="http://service.mcds5510.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:trxnID" type="tns:int"/>
+      </operation>
+      <operation xmlns:operNS="http://service.mcds5510.com" xmlns:retNS="http://service.mcds5510.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="updateTransaction" qname="operNS:updateTransaction" returnQName="retNS:updateTransactionReturn" returnType="rtns:boolean" soapAction="">
+        <parameter xmlns:pns="http://service.mcds5510.com" xmlns:tns="http://crud.mcds5510.com" qname="pns:trxn" type="tns:Transaction"/>
+      </operation>
+      <operation xmlns:operNS="http://service.mcds5510.com" xmlns:retNS="http://service.mcds5510.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="createTransaction" qname="operNS:createTransaction" returnQName="retNS:createTransactionReturn" returnType="rtns:boolean" soapAction="">
+        <parameter xmlns:pns="http://service.mcds5510.com" xmlns:tns="http://crud.mcds5510.com" qname="pns:trxn" type="tns:Transaction"/>
+      </operation>
+      <operation xmlns:operNS="http://service.mcds5510.com" xmlns:retNS="http://service.mcds5510.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getDao" qname="operNS:getDao" returnQName="retNS:getDaoReturn" returnType="rtns:anyType" soapAction="">
+      </operation>
+      <operation xmlns:operNS="http://service.mcds5510.com" name="setDao" qname="operNS:setDao" soapAction="">
+      </operation>
+      <operation xmlns:operNS="http://service.mcds5510.com" xmlns:retNS="http://service.mcds5510.com" xmlns:rtns="http://crud.mcds5510.com" name="getTransaction" qname="operNS:getTransaction" returnQName="retNS:getTransactionReturn" returnType="rtns:Transaction" soapAction="">
+        <parameter xmlns:pns="http://service.mcds5510.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:trxnID" type="tns:int"/>
+      </operation>
+      <parameter name="allowedMethods" value="setDao getDao removeTransaction updateTransaction createTransaction getTransaction"/>
+
+      <typeMapping xmlns:ns="http://service.mcds5510.com" qname="ns:&gt;getTransactionResponse" type="java:com.mcds5510.service.GetTransactionResponse" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://service.mcds5510.com" qname="ns:&gt;setDao" type="java:com.mcds5510.service.SetDao" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://service.mcds5510.com" qname="ns:&gt;setDaoResponse" type="java:com.mcds5510.service.SetDaoResponse" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://crud.mcds5510.com" qname="ns:Transaction" type="java:com.mcds5510.crud.Transaction" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://service.mcds5510.com" qname="ns:&gt;getTransaction" type="java:com.mcds5510.service.GetTransaction" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+  </service>
+</deployment>

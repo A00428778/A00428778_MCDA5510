@@ -1,0 +1,73 @@
+<ns1:deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java" xmlns:ns1="http://xml.apache.org/axis/wsdd/">
+ <ns1:globalConfiguration>
+  <ns1:parameter name="sendMultiRefs" value="true"/>
+  <ns1:parameter name="disablePrettyXML" value="true"/>
+  <ns1:parameter name="adminPassword" value="admin"/>
+  <ns1:parameter name="attachments.Directory" value="./attachments"/>
+  <ns1:parameter name="axis.sendMinimizedElements" value="true"/>
+  <ns1:parameter name="enableNamespacePrefixOptimization" value="true"/>
+  <ns1:parameter name="sendXMLDeclaration" value="true"/>
+  <ns1:parameter name="attachments.implementation" value="org.apache.axis.attachments.AttachmentsImpl"/>
+  <ns1:parameter name="sendXsiTypes" value="true"/>
+  <ns1:requestFlow>
+   <ns1:handler type="java:org.apache.axis.handlers.JWSHandler">
+    <ns1:parameter name="scope" value="session"/>
+   </ns1:handler>
+   <ns1:handler type="java:org.apache.axis.handlers.JWSHandler">
+    <ns1:parameter name="scope" value="request"/>
+    <ns1:parameter name="extension" value=".jwr"/>
+   </ns1:handler>
+  </ns1:requestFlow>
+ </ns1:globalConfiguration>
+ <ns1:handler name="URLMapper" type="java:org.apache.axis.handlers.http.URLMapper"/>
+ <ns1:handler name="Authenticate" type="java:org.apache.axis.handlers.SimpleAuthenticationHandler"/>
+ <ns1:handler name="LocalResponder" type="java:org.apache.axis.transport.local.LocalResponder"/>
+ <ns1:service name="AdminService" provider="java:MSG">
+  <ns1:parameter name="allowedMethods" value="AdminService"/>
+  <ns1:parameter name="enableRemoteAdmin" value="false"/>
+  <ns1:parameter name="className" value="org.apache.axis.utils.Admin"/>
+  <ns1:namespace>http://xml.apache.org/axis/wsdd/</ns1:namespace>
+ </ns1:service>
+ <ns1:service name="Version" provider="java:RPC">
+  <ns1:parameter name="allowedMethods" value="getVersion"/>
+  <ns1:parameter name="className" value="org.apache.axis.Version"/>
+ </ns1:service>
+ <ns1:service name="TrxnWebService" provider="java:RPC" style="wrapped" use="literal">
+  <ns2:operation name="removeTransaction" qname="ns1:removeTransaction" returnQName="ns1:removeTransactionReturn" returnType="xsd:boolean" soapAction="" xmlns:ns1="http://service.mcds5510.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://xml.apache.org/axis/wsdd/">
+   <ns2:parameter qname="ns1:trxnID" type="xsd:int"/>
+  </ns2:operation>
+  <ns1:operation name="updateTransaction" qname="ns2:updateTransaction" returnQName="ns2:updateTransactionReturn" returnType="xsd:boolean" soapAction="" xmlns:ns2="http://service.mcds5510.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns2:trxn" type="ns3:Transaction" xmlns:ns3="http://entity.mcds5510.com"/>
+  </ns1:operation>
+  <ns1:operation name="createTransaction" qname="ns4:createTransaction" returnQName="ns4:createTransactionReturn" returnType="xsd:boolean" soapAction="" xmlns:ns4="http://service.mcds5510.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns4:trxn" type="ns5:Transaction" xmlns:ns5="http://entity.mcds5510.com"/>
+  </ns1:operation>
+  <ns1:operation name="readDataBase" qname="ns6:readDataBase" soapAction="" xmlns:ns6="http://service.mcds5510.com"/>
+  <ns1:operation name="getTransaction" qname="ns7:getTransaction" returnQName="ns7:getTransactionReturn" returnType="ns8:Transaction" soapAction="" xmlns:ns7="http://service.mcds5510.com" xmlns:ns8="http://entity.mcds5510.com">
+   <ns1:parameter qname="ns7:trxnID" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:parameter name="allowedMethods" value="removeTransaction updateTransaction readDataBase createTransaction getTransaction"/>
+  <ns1:parameter name="typeMappingVersion" value="1.2"/>
+  <ns1:parameter name="wsdlPortType" value="TrxnWebService"/>
+  <ns1:parameter name="className" value="com.mcds5510.service.TrxnWebService"/>
+  <ns1:parameter name="wsdlServicePort" value="TrxnWebService"/>
+  <ns1:parameter name="schemaQualified" value="http://service.mcds5510.com,http://entity.mcds5510.com"/>
+  <ns1:parameter name="wsdlTargetNamespace" value="http://service.mcds5510.com"/>
+  <ns1:parameter name="wsdlServiceElement" value="TrxnWebServiceService"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns9:Transaction" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:com.mcds5510.entity.Transaction" xmlns:ns9="http://entity.mcds5510.com"/>
+ </ns1:service>
+ <ns1:transport name="http">
+  <ns1:requestFlow>
+   <ns1:handler type="URLMapper"/>
+   <ns1:handler type="java:org.apache.axis.handlers.http.HTTPAuthHandler"/>
+  </ns1:requestFlow>
+  <ns1:parameter name="qs.list" value="org.apache.axis.transport.http.QSListHandler"/>
+  <ns1:parameter name="qs.method" value="org.apache.axis.transport.http.QSMethodHandler"/>
+  <ns1:parameter name="qs.wsdl" value="org.apache.axis.transport.http.QSWSDLHandler"/>
+ </ns1:transport>
+ <ns1:transport name="local">
+  <ns1:responseFlow>
+   <ns1:handler type="LocalResponder"/>
+  </ns1:responseFlow>
+ </ns1:transport>
+</ns1:deployment>
