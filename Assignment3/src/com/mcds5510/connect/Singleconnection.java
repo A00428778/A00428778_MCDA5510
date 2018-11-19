@@ -15,12 +15,20 @@ public class Singleconnection {
 				// Class.forName("com.mysql.jdbc.Driver");
 				Class.forName("com.mysql.cj.jdbc.Driver");
 				// Setup the connection with the DB
-				connection = DriverManager.getConnection("jdbc:mysql://localhost/transactions?" // DTP I spelled
+				/*connection = DriverManager.getConnection("jdbc:mysql://localhost/transactions?" // DTP I spelled
 						// transactions wrong
 						// oops
 						+ "user=root&password=1023" // Creds
 						+ "&useSSL=false&allowPublicKeyRetrieval=true" // b/c localhost
 						+ "&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC"); // timezone
+				*/
+					connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1/j_wang?" // DTP I spelled
+						// transactions wrong
+						// oops
+						+ "user=j_wang&password=A00428778" // Creds
+						+ "&useSSL=false&allowPublicKeyRetrieval=true" // b/c localhost
+						+ "&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC"); // timezone
+				
 			}catch (Exception e) {
 				throw e;
 			}
