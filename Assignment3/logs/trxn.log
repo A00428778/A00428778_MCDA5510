@@ -1,0 +1,8 @@
+Nov 18, 2018 8:09:15 PM com.mcds5510.dao.MySQLAccess readDataBase
+INFO: read the database record select * from transaction
+Nov 18, 2018 8:09:15 PM com.mcds5510.dao.MySQLAccess removeTransaction
+INFO: remove a transaction
+Nov 18, 2018 8:09:15 PM com.mcds5510.dao.MySQLAccess updateTransaction
+INFO: update a transaction
+Nov 18, 2018 8:09:15 PM com.mcds5510.dao.MySQLAccess createTransaction
+INFO: ID Exists
